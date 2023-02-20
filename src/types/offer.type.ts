@@ -26,6 +26,7 @@ export enum OfferType {
 //   Fridge = 'Fridge',
 // }
 
+
 export type Offer = {
   title: string;
   description: string;
