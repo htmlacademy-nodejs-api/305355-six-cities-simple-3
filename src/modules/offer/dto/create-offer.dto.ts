@@ -1,5 +1,4 @@
 import { IsDateString, IsEnum, Max, MaxLength, Min, MinLength } from 'class-validator';
-// import { City, OfferFeature, OfferPhotos, OfferType } from '../../../types/offer.type.js';
 import { OfferType } from '../../../types/offer.type.js';
 
 export default class CreateOfferDTO {
@@ -14,14 +13,8 @@ export default class CreateOfferDTO {
   @IsDateString({}, {message: 'issueDate must be valid ISO date'})
   public issueDate!: Date;
 
-  // public city!: City;
-
   @MaxLength(256, {message: 'Too long for previewImage'})
   public previewImage!: string;
-
-  // public photos!: OfferPhotos;
-
-  // public isPremium!: boolean;
 
   @Min(1, {message: 'rating must be 1 or more'})
   @Max(5, {message: 'rating must be 5 or less'})
@@ -42,13 +35,5 @@ export default class CreateOfferDTO {
   @Max(100000, {message: 'rating must be 5 or less'})
   public price!: number;
 
-  // public features!: OfferFeature[];
-
-  // @IsMongoId({message: 'userId must be valid id'})
   public userId!: string;
-
-  // public commentsCount!: number;
-
-  // public coords!: [number, number];
-
 }

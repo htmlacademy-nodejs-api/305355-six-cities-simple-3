@@ -16,6 +16,6 @@ export default class CreateUserDTO {
   @Length(6, 12, {message: 'password must be from 6 to 12 symbols'})
   public password!: string;
 
-  @IsString({message: 'avatar is required'})
+  @IsString({message: 'type is required'})
   public type!: UserType;
 }

@@ -4,16 +4,59 @@ GET http://localhost:3123/api HTTP/1.1
 
 ###
 
+# Пользователи
+## Зарегистрировать пользователя
+
+POST  http://localhost:31337/users/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "kt1@kt.kt",
+  "password": "123123",
+  "name": "test_user",
+  "avatar": "some.png",
+  "type": "pro"
+}
+
+###
+
+## Залогинить пользователя
+
+POST http://localhost:31337/users/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "kt@kt.kt",
+  "password": "123123"
+}
+
+###
+
+## Проверить, залогинен ли пользователь
+
+GET http://localhost:31337/users/login HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Imt0QGt0Lmt0IiwiaWQiOiI2M2Y1MmIxNWFmYjI1MDVhYmRjNjdmODciLCJpYXQiOjE2NzcwODg4MjIsImV4cCI6MTY3NzI2MTYyMn0.LO6FVbz8aODFlFmaRknCAni1liSBAze_VxslYM_eV5I
+
+###
+
+# Предложения
+## Получить список предложений
+
 GET http://localhost:31337/offers HTTP/1.1
 
 ###
 
-GET http://localhost:31337/offers/:offerId HTTP/1.1
+## Получить информацию о конкретном предложении
+
+GET http://localhost:31337/offers/63f545d47ed839eee03faeee HTTP/1.1
 
 ###
 
+## Создать предложение
+
 POST http://localhost:31337/offers HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Imt0QGt0Lmt0IiwiaWQiOiI2M2Y1MmIxNWFmYjI1MDVhYmRjNjdmODciLCJpYXQiOjE2NzcwODg4MjIsImV4cCI6MTY3NzI2MTYyMn0.LO6FVbz8aODFlFmaRknCAni1liSBAze_VxslYM_eV5I
 
 {
   "title": "Ноыое предожение",
@@ -29,43 +72,57 @@ Content-Type: application/json
   "guestsCount": 5,
   "price": 1408,
   "features": [],
-  "userId": "someId62823cb2c5a64ce9f1b50ec8",
+  "userId": "63f52b15afb2505abdc67f87",
   "commentsCount": 155,
-  "coords": [45, 45],
+  "coords": [45, 45]
 }
 
 ###
 
-DELETE http://localhost:31337/offers/:offerId HTTP/1.1
+## Удалить предложение
+
+DELETE http://localhost:31337/offers/63f545d47ed839eee03faeee HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Imt0QGt0Lmt0IiwiaWQiOiI2M2Y1MmIxNWFmYjI1MDVhYmRjNjdmODciLCJpYXQiOjE2NzcwODg4MjIsImV4cCI6MTY3NzI2MTYyMn0.LO6FVbz8aODFlFmaRknCAni1liSBAze_VxslYM_eV5I
 
 ###
 
-PATCH http://localhost:31337/offers/:offerId" HTTP/1.1
+## Изменить предложение
+
+PATCH http://localhost:31337/offers/63f601cbbcb6c5e169d8d5 HTTP/1.1
 Content-Type: application/json
 
 {
-  "title": "Обновлено",
-  "description": "Ух ты!",
+  "title": "Обновлено заголовок!",
+  "description": "Ух ты!Ух ты!Ух ты!Ух ты!Ух ты!Ух ты!Ух ты!Ух ты!Ух ты!"
 }
 
 ###
 
-GET http://localhost:31337/offers/:offerId/comments HTTP/1.1
+# Комментарии
+## Получить список комментариев для преждложения
+
+GET http://localhost:31337/offers/63f601cbbcb6c5e169d8d5e3/comments HTTP/1.1
 
 ###
 
-POST http://localhost:31337/comment HTTP/1.1
+## Создать комментарий для предложения
+
+POST http://localhost:31337/comments HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Imt0QGt0Lmt0IiwiaWQiOiI2M2Y1MmIxNWFmYjI1MDVhYmRjNjdmODciLCJpYXQiOjE2NzcwODg4MjIsImV4cCI6MTY3NzI2MTYyMn0.LO6FVbz8aODFlFmaRknCAni1liSBAze_VxslYM_eV5I
 
 {
-  "text": "my opinnipb",
-  "userId": "someId",
-  "offerId": "someOfferId",
+  "text": "321123",
+  "userId": "63f52b15afb2505abdc67f87",
+  "offerId": "63f601cbbcb6c5e169d8d5e3",
+  "rating": 5
 }
 
 ###
 
-POST http://localhost:31337/users/:userId/avatar HTTP/1.1
+## Создать аватар для пользователя
+
+POST http://localhost:31337/users/63f52b15afb2505abdc67f87/avatar HTTP/1.1
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
@@ -74,8 +131,3 @@ Content-Type: image/png
 
 < /Users/tmp/screen.png
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
-
-###
-
-GET http://localhost:31337/users/login HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRvcmFuc0BvdmVybG9vay5uZXQiLCJpZCI6IjYyOTM0MDgyZDFlMDU5MDBlMmVmYWVjMyIsImlhdCI6MTY1MzkwMzA1OSwiZXhwIjoxNjU0MDc1ODU5fQ.yMN3DID7PoMO1I4-fgwjGVWjdfnpQsCA8TL02APb-rU

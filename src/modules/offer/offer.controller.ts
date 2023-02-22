@@ -39,7 +39,7 @@ export default class OfferController extends Controller {
       method: HttpMethod.Post,
       handler: this.create,
       middlewares: [
-        new PrivateRouteMiddleware(),
+        new PrivateRouteMiddleware(this.logger),
         new ValidateDtoMiddleware(CreateOfferDTO)
       ],
     });
@@ -49,7 +49,7 @@ export default class OfferController extends Controller {
       handler: this.show,
       middlewares: [
         new ValidateObjectIdMiddleware('offerId'),
-        new DocumentExistsMiddleware(this.offerService, 'Offer', 'offerId'),
+        new DocumentExistsMiddleware(this.offerService, 'Offer', 'offerId', this.logger),
       ],
     });
     this.addRoute({
@@ -57,9 +57,9 @@ export default class OfferController extends Controller {
       method: HttpMethod.Delete,
       handler: this.delete,
       middlewares: [
-        new PrivateRouteMiddleware(),
+        new PrivateRouteMiddleware(this.logger),
         new ValidateObjectIdMiddleware('offerId'),
-        new DocumentExistsMiddleware(this.offerService, 'Offer', 'offerId'),
+        new DocumentExistsMiddleware(this.offerService, 'Offer', 'offerId', this.logger),
       ],
     });
     this.addRoute({
@@ -67,10 +67,10 @@ export default class OfferController extends Controller {
       method: HttpMethod.Patch,
       handler: this.update,
       middlewares: [
-        new PrivateRouteMiddleware(),
+        new PrivateRouteMiddleware(this.logger),
         new ValidateObjectIdMiddleware('offerId'),
         new ValidateDtoMiddleware(UpdateOfferDTO),
-        new DocumentExistsMiddleware(this.offerService, 'Offer', 'offerId'),
+        new DocumentExistsMiddleware(this.offerService, 'Offer', 'offerId', this.logger),
       ],
     });
     this.addRoute({
@@ -79,7 +79,7 @@ export default class OfferController extends Controller {
       handler: this.getComments,
       middlewares: [
         new ValidateObjectIdMiddleware('offerId'),
-        new DocumentExistsMiddleware(this.offerService, 'Offer', 'offerId'),
+        new DocumentExistsMiddleware(this.offerService, 'Offer', 'offerId', this.logger),
       ],
     });
   }
