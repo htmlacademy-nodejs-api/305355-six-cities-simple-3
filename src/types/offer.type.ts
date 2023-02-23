@@ -15,18 +15,6 @@ export enum OfferType {
   Hotel = 'hotel',
 }
 
-// export type OfferType = 'apartment' | 'house' | 'room' | 'hotel';
-// export enum OfferFeatures {
-//   Breakfast = 'Breakfast',
-//   AirConditioning = 'Air conditioning',
-//   LaptopFriendlyWorkspace = 'Laptop friendly workspace',
-//   BabySeat = 'Baby seat',
-//   Washer = 'Washer',
-//   Towels = 'Towels',
-//   Fridge = 'Fridge',
-// }
-
-
 export type Offer = {
   title: string;
   description: string;
@@ -42,7 +30,6 @@ export type Offer = {
   price: number;
   features: OfferFeature[];
   author: User;
-  // userId: string;
   commentsCount: number;
   coords: [number, number];
 }
